@@ -15,9 +15,9 @@ public class ShopeeUserDetailService implements UserDetailsService {
 
     @Override
     public UserInfo loadUserByUsername(String info) throws UsernameNotFoundException {
-        ShopeeUser shopeeUser = userDao.findByEmail(info).get();
+        ShopeeUser shopeeUser = userDao.findByEmail(info);
         if (shopeeUser == null) {
-            shopeeUser = userDao.findByUsername(info).get();
+            shopeeUser = userDao.findByUsername(info);
         }
 
         if (shopeeUser == null) {

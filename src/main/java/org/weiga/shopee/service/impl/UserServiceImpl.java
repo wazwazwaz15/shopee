@@ -25,11 +25,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public ShopeeUser createUser(UserCreateRequest userCreateRequest) {
 
-        if (userDao.findByEmail(userCreateRequest.getEmail()).isPresent()) {
+        if (userDao.findByEmail(userCreateRequest.getEmail()) == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
-        if (userDao.findByUsername(userCreateRequest.getUsername()).isPresent()) {
+        if (userDao.findByUsername(userCreateRequest.getUsername()) == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         shopeeUser.setPassword(userCreateRequest.getPassword());
         shopeeUser.setEmail(userCreateRequest.getEmail());
         shopeeUser.setPassword(passwordEncoder.encode(userCreateRequest.getPassword()));
-        shopeeUser.setRole(userCreateRequest.getRole()!=null? userCreateRequest.getRole() : "USER");
+        shopeeUser.setRole(userCreateRequest.getRole() != null ? userCreateRequest.getRole() : "USER");
 
         return userDao.save(shopeeUser);
     }

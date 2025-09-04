@@ -5,12 +5,12 @@ import org.springframework.stereotype.Repository;
 import org.weiga.shopee.model.ShopeeUser;
 
 import java.util.Optional;
-
+@Repository
 
 public interface UserDao extends JpaRepository<ShopeeUser,Long> {
-    Optional<ShopeeUser> findByUsername(String username);
+    ShopeeUser findByUsername(String username);
 
-    Optional<ShopeeUser> findByEmail(String email);
+    ShopeeUser findByEmail(String email);
 
 
 
